@@ -9,23 +9,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-include 'vendor/autoload.php';
+include '../vendor/autoload.php';
 
-include 'database/Connection.php';
+include '../src/database/Connection.php';
 
-foreach (glob('interfaces/*.php') as $file) include $file;
+foreach (glob('../src/interfaces/*.php') as $file) include $file;
 
-include 'classes/BaseRoute.php';
+include '../src/classes/BaseRoute.php';
 
-foreach (glob('routes/*.php') as $file) include $file;
-foreach (glob('middlewares/*.php') as $file) include $file;
-foreach (glob('models/*.php') as $file) include $file;
-foreach (glob('repositories/*.php') as $file) include $file;
-foreach (glob('services/*.php') as $file) include $file;
+foreach (glob('../src/routes/*.php') as $file) include $file;
+foreach (glob('../src/middlewares/*.php') as $file) include $file;
+foreach (glob('../src/models/*.php') as $file) include $file;
+foreach (glob('../src/repositories/*.php') as $file) include $file;
+foreach (glob('../src/services/*.php') as $file) include $file;
 
 use Dotenv\Dotenv;
 
-$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv::createImmutable(__DIR__.'/..');
 $dotenv->load();
 
 // echo '<pre>';
