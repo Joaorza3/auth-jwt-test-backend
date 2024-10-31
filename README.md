@@ -14,3 +14,5 @@ composer install
 ```sh
 docker compose up -d --build
 ```
+
+3. A aplicação estará rodando na porta `8000`
