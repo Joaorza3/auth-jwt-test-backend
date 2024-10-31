@@ -28,22 +28,9 @@ use Dotenv\Dotenv;
 $dotenv = Dotenv::createImmutable(__DIR__.'/..');
 $dotenv->load();
 
-// echo '<pre>';
-// print_r($_ENV);
-// echo '</pre>';
-// echo die();
-
-
-// // Captura o método HTTP e a rota a partir da URL
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $path = $_GET['path'] ?? '';
 
-// echo '<pre>';
-// print_r($_GET);
-// echo '</pre>';
-// echo die();
-
-// // Cria uma instância do roteador
 $router = new Router();
 
 $auth_middleware = new AuthMiddleware();
@@ -51,5 +38,4 @@ $auth_middleware = new AuthMiddleware();
 (new UserRouter('/users', $auth_middleware))->registerRoutes($router);
 (new AuthRouter('/auth'))->registerRoutes($router);
 
-// // Executa o roteador
 $router->run($method, $path);
