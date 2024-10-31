@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: my_mysql_auth
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test_auth_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3309:3306"
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_php_app
+    restart: always
+    volumes:
+      - ./:/var/www/html/
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: test_auth_db
+      DB_USER: user
+      DB_PASS: pass
+      DB_PORT: 3306
+    command: ["apache2-foreground"]
