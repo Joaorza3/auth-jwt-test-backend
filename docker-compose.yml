@@ -33,4 +33,5 @@ services:
       DB_USER: user
       DB_PASS: pass
       DB_PORT: 3306
+      SECRET_KEY: weak_secret_key
     command: ["apache2-foreground"]
